@@ -17,10 +17,10 @@ function BookForm(props) {
       />
 
       <div className="form-group">
-        <label htmlFor="author">Author</label>
+        <label htmlFor="authorId">Author</label>
         <div className="field">
           <select
-            id="author"
+            id="authorId"
             name="authorId"
             onChange={onChange}
             value={book.authorId || ""}

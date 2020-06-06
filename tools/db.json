@@ -1,1 +1,32 @@
-{"books":[{"id":1,"title":"Good to great","slug":"good-to-greate","authorId":1,"category":"Business"},{"id":2,"title":"Spiral Dynamic Integral","slug":"spiral-dynamic-integral","authorId":2,"category":"Business"},{"id":3,"title":"Just random book","slug":"random-book","authorId":3,"category":"Other"}],"authors":[{"id":1,"name":"Jim Collins"},{"id":2,"name":"Don Beck"},{"id":3,"name":"John Snow"}]}
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "Good to great",
+      "slug": "good-to-greate",
+      "authorId": 1,
+      "category": "Business"
+    },
+    {
+      "id": 2,
+      "title": "Spiral Dynamic Integral",
+      "slug": "spiral-dynamic-integral",
+      "authorId": 2,
+      "category": "Business"
+    }
+  ],
+  "authors": [
+    {
+      "id": 1,
+      "name": "Jim Collins"
+    },
+    {
+      "id": 2,
+      "name": "Don Beck"
+    },
+    {
+      "id": 3,
+      "name": "John Snow"
+    }
+  ]
+}

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Prompt } from "react-router-dom";
 import { toast } from "react-toastify";
-import * as bookApi from "../api/bookApi";
+import bookStore from "../stores/bookStore";
+import * as bookActions from "../actions/bookActions";
 import BookForm from "./BookForm";
 
 const ManageBookPage = (props) => {
   const [errors, setErrors] = useState({});
+  const [books, setBooks] = useState(bookStore.getBooks());
   const [book, setBook] = useState({
     id: null,
     slug: "",
@@ -15,9 +17,19 @@ const ManageBookPage = (props) => {
   });
 
   useEffect(() => {
+    bookStore.addChangeListener(onChange);
     const slug = props.match.params.slug;
-    if (slug) bookApi.getBookBySlug(slug).then((_book) => setBook(_book));
-  }, [props.match.params.slug]);
+    if (books.length === 0) {
+      bookActions.loadBooks();
+    } else if (slug) {
+      setBook(bookStore.getBookBySlug(slug));
+    }
+    return () => bookStore.removeChangeListener(onChange);
+  }, [books.length, props.match.params.slug]);
+
+  function onChange() {
+    setBooks(bookStore.getBooks());
+  }
 
   const handleChange = ({ target }) => {
     setBook({ ...book, [target.name]: target.value });
@@ -39,7 +51,7 @@ const ManageBookPage = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!formIsValid()) return;
-    bookApi.saveBook(book).then(() => {
+    bookActions.saveBook(book).then(() => {
       props.history.push("/books");
       toast.success("Book saved.");
     });
